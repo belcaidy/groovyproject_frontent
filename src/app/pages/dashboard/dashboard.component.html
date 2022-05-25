@@ -1,0 +1,44 @@
+<app-header></app-header>
+
+<br>
+
+<ng-container>
+  <div style="padding:30px;">
+    <input style="font-size:15px; width: 80% ;border-radius: 25px; margin-left: 2px ;  border: 2px solid black;
+  padding: 5px; " type="text" placeholder="Search  " (keyup)="filterAdds($event)">
+    <br>
+    <br>
+    <div nz-row [nzGutter]=[8,8]>
+      <div *ngFor='let project of filteredAdds ; let i = index' nz-col nzSm="24" nzXs="24" nzMd="12" nzLg="6">
+        <nz-card style=" margin-bottom: 20px" nzTitle='{{project.title}}'
+                 [nzActions]="[actionEdit]">
+          <p><strong>Price:</strong> {{project.price}}</p>
+          <p><strong>Sub Title:</strong> {{project.subTitle}}</p>
+          <img style=" margin: auto; object-fit: contain; height: 300px;width: 200px;" alt="example"
+               [src]="project?.images[0] !=null ? project?.images[0]?.imageString : fallback"/>
+        </nz-card>
+        <ng-template #actionEdit>
+          <button
+            nzTooltipTitle="Show" nzTooltipPlacement="topCenter" nz-tooltip
+            nz-button (click)='showModal(project.id)'>
+            show
+          </button>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+
+</ng-container>
+
+<app-show-adds-details [addId]="id" *ngIf='isShowModal' (modalEmitter)='isShowModal=$event'
+                       [isShowModal]="isShowModal"></app-show-adds-details>
+
+
+
+
+
+
+
+
+
+

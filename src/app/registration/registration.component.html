@@ -1,0 +1,54 @@
+<div class="login-center">
+
+  <div class="logo-image">
+    <img src="/assets/logo.png" alt="">
+  </div>
+
+  <form nz-form [formGroup]="validateForm" class="login-form" (ngSubmit)="submitForm()">
+    <nz-form-item>
+      <nz-form-control nzErrorTip="Please input your Full Name!">
+        <nz-select formControlName="role" nzShowSearch nzAllowClear nzPlaceHolder="Select a person">
+          <nz-option nzLabel="ADMIN" nzValue="ROLE_ADMIN"></nz-option>
+          <nz-option nzLabel="CUSTOMER" nzValue="ROLE_CUSTOMER"></nz-option>
+        </nz-select>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-control nzErrorTip="Please input your Full Name!">
+        <nz-input-group nzPrefixIcon="user">
+
+          <label>
+            <input type="text" nz-input formControlName="fullName" placeholder="Full Name"/>
+          </label>
+
+        </nz-input-group>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-control nzErrorTip="Please input your username!">
+        <nz-input-group nzPrefixIcon="user">
+
+          <label>
+            <input type="text" nz-input formControlName="username" placeholder="Username"/>
+          </label>
+
+        </nz-input-group>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-control nzErrorTip="Please input your Password!">
+        <nz-input-group nzPrefixIcon="lock">
+          <label>
+            <input type="password" nz-input formControlName="password" placeholder="Password"/>
+          </label>
+        </nz-input-group>
+      </nz-form-control>
+    </nz-form-item>
+
+    <button nz-button class="login-form-button login-form-margin" [nzType]="'primary'">Registration</button>
+
+  </form>
+
+</div>

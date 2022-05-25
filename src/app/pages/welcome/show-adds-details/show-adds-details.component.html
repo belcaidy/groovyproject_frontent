@@ -1,0 +1,26 @@
+<nz-modal [nzWidth]="700" [(nzVisible)]="isShowModal" nzCentered="true" nzTitle="Show Advertisement Details"
+          (nzOnCancel)="handleCancel()">
+  <ng-container *nzModalContent>
+    <h2>Title: {{announce?.title}}</h2>
+    <h3>Sub Title: {{announce?.subTitle}}</h3>
+    <p>Description: {{announce?.description}}</p>
+    <h2>Price: {{announce?.price}}</h2>
+    <br>
+
+    <ng-container *ngFor="let image of images">
+      <img
+        nz-image
+        width="200px"
+        height="200px"
+        [nzSrc]="image"
+        alt=""
+      />
+      &nbsp;&nbsp;
+    </ng-container>
+
+
+  </ng-container>
+  <div *nzModalFooter>
+    <button nz-button nzType="default" (click)="handleCancel()">Ok</button>
+  </div>
+</nz-modal>

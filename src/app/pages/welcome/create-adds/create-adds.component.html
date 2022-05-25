@@ -1,0 +1,70 @@
+
+<a [nzSize]="size" nzShape="round" nz-button [routerLink]="['/welcome/create']">Create a Adds</a>
+
+
+<ng-container>
+
+  <br>
+  <br>
+
+  <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
+
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="title" nzRequired>Title</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input Title with length six or more">
+        <label for="title"></label><input minlength="6" nz-input id="title" formControlName="title" placeholder="title"/>
+      </nz-form-control>
+    </nz-form-item>
+
+
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="shortDescription" nzRequired>Sub  Title</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input Short Description!">
+        <label for="shortDescription"></label><input nz-input id="shortDescription" formControlName="subTitle"
+                                                     placeholder="shortDescription"/>
+      </nz-form-control>
+    </nz-form-item>
+
+
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="price" nzRequired>Price</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input Price!">
+        <label for="price"></label><input nz-input type="number" id="price" formControlName="price" placeholder="price"/>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label [nzSpan]="6" nzRequired>Description</nz-form-label>
+      <nz-form-control [nzSpan]="14" nzErrorTip="Please write something here! with length 10 or more">
+        <label>
+          <textarea formControlName="description" minlength="10" nz-input rows="2" placeholder="write any thing"></textarea>
+        </label>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSpan]="6" nzRequired>Illustration</nz-form-label>
+
+      <div style="width: 60%">
+        <label style="cursor: pointer; font-weight: bold" for="file">Choose your file</label>
+      </div>
+      <input
+        id="file"
+        type="file"
+        class="form-control"
+        (change)="onFileChange($event)">
+      <br>
+      <ng-container *ngFor='let url of images;let i = index'>
+        <img [src]="url" height="150" width="200px" (click)="removeImage(i)" style="margin: 3px;"> <br/>
+      </ng-container>
+
+
+    </nz-form-item>
+
+    <nz-form-item nz-row class="register-area">
+      <nz-form-control [nzSpan]="14" [nzOffset]="6">
+        <button nz-button nzType="primary" >Save</button>
+      </nz-form-control>
+    </nz-form-item>
+  </form>
+
+</ng-container>

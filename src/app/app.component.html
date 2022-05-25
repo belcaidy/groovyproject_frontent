@@ -1,0 +1,83 @@
+<ng-container *ngIf="loader; else loaderTemp">
+  <nz-layout class="app-layout" *ngIf="userService.getRole() && url !== '/' ">
+    <nz-sider class="menu-sidebar"
+              nzCollapsible
+              nzWidth="256px"
+              nzBreakpoint="md"
+              [(nzCollapsed)]="isCollapsed"
+              [nzTrigger]="null">
+      <div class="sidebar-logo">
+        <a href="#" target="_blank">
+<!--          <img src="assets/logo.png" alt="logo">-->
+          <h1 class="logo-text">LeGoodCoin</h1>
+        </a>
+      </div>
+      <ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
+        <li nz-submenu nzOpen nzTitle="Menu" nzIcon="dashboard">
+          <ul *ngIf="userService.getRole()">
+            <li nz-menu-item >
+              <a routerLink="/welcome">Adds</a>
+            </li>
+            <li nz-menu-item >
+              <a routerLink="/welcome/user-list">User</a>
+            </li>
+          </ul>
+          <ul *ngIf="userService.getCustomerRole()">
+            <li nz-menu-item >
+              <a routerLink="/dashboard">Dashboard</a>
+            </li>
+          </ul>
+
+          <ul>
+            <li nz-menu-item >
+              <a href="/">Go to Home</a>
+            </li>
+          </ul>
+          <ul>
+            <li nz-menu-item nzMatchRouter>
+              <a (click)="logout()">Logout</a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </nz-sider>
+    <nz-layout>
+      <nz-header>
+        <div class="app-header">
+        <span class="header-trigger" (click)="isCollapsed = !isCollapsed">
+            <i class="trigger"
+               nz-icon
+               [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"
+            ></i>
+        </span>
+        </div>
+      </nz-header>
+      <nz-content>
+        <div class="inner-content">
+
+          <router-outlet></router-outlet>
+        </div>
+      </nz-content>
+    </nz-layout>
+  </nz-layout>
+
+  <ng-container *ngIf="!userService.getRole() || url === '/'">
+    <router-outlet></router-outlet>
+  </ng-container>
+
+</ng-container>
+
+<ng-template #loaderTemp>
+  <nz-spin nzSimple [nzSize]="'large'"></nz-spin>
+</ng-template>
+
+
+<ng-http-loader
+  [backdrop]="true"
+  [backgroundColor]="'#ff0000'"
+  [debounceDelay]="100"
+  [extraDuration]="300"
+  [minDuration]="1000"
+
+  [spinner]="spinkit.skWave">
+</ng-http-loader>

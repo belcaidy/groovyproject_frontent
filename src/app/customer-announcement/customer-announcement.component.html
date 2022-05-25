@@ -1,0 +1,52 @@
+<app-header></app-header>
+
+
+<ng-container>
+  <div style="padding:30px;">
+    <nz-table #filterTable [nzData]="listOfData" nzTableLayout="fixed">
+      <thead>
+      <tr>
+        <th
+          *ngFor="let column of listOfColumns; trackBy: trackByName"
+          [(nzSortOrder)]="column.sortOrder"
+          [nzSortFn]="column.sortFn"
+          [nzFilters]="column.listOfFilter"
+          [nzFilterFn]="column.filterFn"
+        >
+          {{ column.name }}
+        </th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let data of filterTable.data">
+        <td>{{ data.title }}</td>
+        <td>{{ data.dateCreated }}</td>
+        <td>{{data.price}}</td>
+        <td>{{data.subTitle}}</td>
+        <td>
+<!--                <button [routerLink]="['/update', data.id]">Edit</button>-->
+
+
+<!--                <button-->
+<!--                  nz-button-->
+<!--                  nzDanger-->
+<!--                  nz-popconfirm-->
+<!--                  nzPopconfirmTitle="Are you sure for Deletion!!!"-->
+<!--                  nzPopconfirmPlacement="bottom"-->
+<!--                  (nzOnConfirm)="delete(data.id)"-->
+<!--                  nzType="link">-->
+<!--                  Delete-->
+<!--                </button>-->
+                <!--            <button (click)="delete(data.id)">Delete</button>-->
+                <button (click)='showModal(data.id)'>Show</button>
+        </td>
+      </tr>
+      </tbody>
+    </nz-table>
+
+  </div>
+
+  <app-show-adds-details [addId]="id" *ngIf='isShowModal' (modalEmitter)='isShowModal=$event'
+                         [isShowModal]="isShowModal"></app-show-adds-details>
+
+</ng-container>
